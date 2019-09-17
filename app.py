@@ -205,9 +205,10 @@ def iothub_client_sample_run():
                 print ( "IoTHubClient sending %d messages" % MESSAGE_COUNT )
                 temperature = sensor.read_temperature()
                 humidity = sensor.read_humidity()
+                pressure = sensor.read_pressure()
                 msg_txt_formatted = MSG_TXT % (
                     temperature,
-                    humidity)
+                    humidity, pressure)
                 print (msg_txt_formatted)
                 message = IoTHubMessage(msg_txt_formatted)
                 # optional: assign ids
