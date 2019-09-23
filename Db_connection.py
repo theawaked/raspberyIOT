@@ -2,13 +2,28 @@ import sqlite3
 
 sqlite_file = '/home/pi/Desktop/program/sensordata'
 
-conn = sqlite3.connect('sensordata.sqlite3')
+conn = sqlite3.connect('sensordata')
 c = conn.cursor()
 
 table_name = "sensorreadings"
 temperature_column = "temperature"
 humidity_column = "humidity"
 pressure_column = "pressure"
+
+table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
+                            id integer PRIMARY KEY,
+                            temperature NUMERIC,
+                            humidity NUMERIC,
+                            pressure NUMERIC,
+                            date text,
+                            time text 
+                        );"""
+    
+try:
+    c.execute(table_create_string)
+except sqlite3.Error as e:
+        print(e)
+
 
 try:
     c.execute("INSERT INTO {tn} ({cn1}, {cn2}, {cn3}) VALUES (123456, 123456, 123456)".\
