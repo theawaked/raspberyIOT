@@ -2,7 +2,7 @@ import sqlite3
 
 sqlite_file = '/home/pi/Desktop/program/sensordata'
 
-conn = sqlite3.connect('sensordata.sqlite')
+conn = sqlite3.connect('sensordata.sqlite3')
 c = conn.cursor()
 
 table_name = "sensorreadings"
