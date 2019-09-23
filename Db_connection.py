@@ -39,8 +39,10 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
     date = datetimevariable.strftime("%d-%m-%Y")
     time = datetimevariable.strftime("%H:%M:%S")
 
-    print("datum: " + date )
-    print("tijd: " + time )
+  
+
+    print( date )
+    print( time )
     tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, date, time)VALUES({},{},{},{},{})""".format(temperature,humidity,pressure,date,time)
     c = connection.cursor()
     try:
