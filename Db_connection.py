@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 
-conn = create_connection()
+conn=sqlite3.connect('sensordata')
 c = conn.cursor()
 
 table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
