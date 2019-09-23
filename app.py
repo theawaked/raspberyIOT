@@ -229,7 +229,7 @@ def iothub_client_sample_run():
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
 
-                database.insert_dbvalues(temperature,humidity.pressure)    
+                database.insert_dbvalues(temperature,humidity,pressure)    
 
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
 
