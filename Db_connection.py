@@ -44,7 +44,7 @@ def create_connection():
 
 def insert_dbvalues(connection,temperature,humidity,pressure):
     datetimevariable=datetime.now()
-    date = datetimevariable.strftime("%d-%m-%Y%")
+    date = datetimevariable.strftime("%d-%m-%Y")
     time = datetimevariable.strftime("%H:%M:%S")
 
     print("datum: " + date )
