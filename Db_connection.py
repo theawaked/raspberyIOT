@@ -1,14 +1,14 @@
 import sqlite3
 
-sqlite_file = '/home/pi/Desktop/program/sensordata'
+# sqlite_file = '/home/pi/Desktop/program/sensordata'
 
-conn = create_connection()
-c = conn.cursor()
+# conn = create_connection()
+# c = conn.cursor()
 
-table_name = "sensorreadings"
-temperature_column = "temperature"
-humidity_column = "humidity"
-pressure_column = "pressure"
+# table_name = "sensorreadings"
+# temperature_column = "temperature"
+# humidity_column = "humidity"
+# pressure_column = "pressure"
 
 table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             id integer PRIMARY KEY,
@@ -21,10 +21,10 @@ table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
     
 #tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(1,1,1)"""
 
-try:
-    c.execute(table_create_string)
-except sqlite3.Error as e:
-        print(e)
+# try:
+#     c.execute(table_create_string)
+# except sqlite3.Error as e:
+#         print(e)
 
 # try:
 #     c.execute(tables_insert_string)
@@ -51,7 +51,9 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
 
     connection.commit()
 
-insert_dbvalues(create_connection(),1,2,3)
+    c.close()
+
+# insert_dbvalues(create_connection(),1,2,3)
 # try:
 #     c.execute("INSERT INTO {tn} ({cn1}, {cn2}, {cn3}) VALUES (123456, 123456, 123456)".\
 #         format(tn=table_name, cn1=temperature_column, cn2=humidity_column, cn3=pressure_column))
@@ -59,4 +61,4 @@ insert_dbvalues(create_connection(),1,2,3)
 #     print('ERROR: integerityError')
 
 
-conn.close()
+# conn.close()

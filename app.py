@@ -16,6 +16,7 @@ from Adafruit_BME280 import *
 import re
 from telemetry import Telemetry
 
+import sqlite3
 import Db_connection as database
 databaseconnection = database.create_connection()
 
