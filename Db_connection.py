@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 # sqlite_file = '/home/pi/Desktop/program/sensordata'
 
@@ -42,6 +43,12 @@ def create_connection():
     return conn 
 
 def insert_dbvalues(connection,temperature,humidity,pressure):
+    datetimevariable=datetime.now()
+    date = datetimevariable.strftime("%d-%m-%Y%")
+    time = datetimevariable.strftime("%H:%M:%S")
+
+    print("datum: " + date )
+    print("tijd: " + time )
     tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES({},{},{})""".format(temperature,humidity,pressure)
     c = connection.cursor()
     try:
