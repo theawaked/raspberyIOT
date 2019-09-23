@@ -16,6 +16,8 @@ from Adafruit_BME280 import *
 import re
 from telemetry import Telemetry
 
+import Db_connection as database
+
 # HTTP options
 # Because it can poll "after 9 seconds" polls will happen effectively
 # at ~10 seconds.
@@ -196,6 +198,7 @@ def iothub_client_sample_run():
             sensor = BME280(address = config.I2C_ADDRESS)
         else:
             sensor = BME280SensorSimulator()
+            print("no sensor, using simulator")
 
         telemetry.send_telemetry_data(parse_iot_hub_name(), EVENT_SUCCESS, "IoT hub connection is established")
         while True:
@@ -225,6 +228,9 @@ def iothub_client_sample_run():
                 status = client.get_send_status()
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
+
+                database.insert_dbvalues(temperature,humidity.pressure)    
+
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
 
     except IoTHubError as iothub_error:
