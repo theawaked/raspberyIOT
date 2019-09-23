@@ -19,7 +19,7 @@ table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             time text 
                         );"""
     
-tables_insert_string = """INSERT INTO sensorreadings(termperature, humidity, pressure)VALUES(1,1,1)"""
+tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(1,1,1)"""
 
 try:
     c.execute(table_create_string)
