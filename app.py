@@ -17,6 +17,7 @@ import re
 from telemetry import Telemetry
 
 import Db_connection as database
+databaseconnection = database.create_connection()
 
 # HTTP options
 # Because it can poll "after 9 seconds" polls will happen effectively
@@ -229,7 +230,7 @@ def iothub_client_sample_run():
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
 
-                database.insert_dbvalues(temperature,humidity,pressure)    
+                database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
 

@@ -2,7 +2,7 @@ import sqlite3
 
 sqlite_file = '/home/pi/Desktop/program/sensordata'
 
-conn = sqlite3.connect('sensordata')
+conn = create_connection()
 c = conn.cursor()
 
 table_name = "sensorreadings"
@@ -33,17 +33,25 @@ except sqlite3.Error as e:
 
 # conn.commit()
 
-def insert_dbvalues(temperature,humidity,pressure):
-    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES({},{},{})""".format(temperature,humidity,pressure)
+def create_connection():
+    try:
+        conn=sqlite3.connect('sensordata')
+    except sqlite3.Error as e:
+     print(e)
 
+    return conn 
+
+def insert_dbvalues(connection,temperature,humidity,pressure):
+    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES({},{},{})""".format(temperature,humidity,pressure)
+    c = connection.cursor()
     try:
         c.execute(tables_insert_string)
     except sqlite3.IntegrityError as e:
         print(e)
 
-    conn.commit()
+    connection.commit()
 
-insert_dbvalues(1,2,3)
+insert_dbvalues(create_connection(),1,2,3)
 # try:
 #     c.execute("INSERT INTO {tn} ({cn1}, {cn2}, {cn3}) VALUES (123456, 123456, 123456)".\
 #         format(tn=table_name, cn1=temperature_column, cn2=humidity_column, cn3=pressure_column))
