@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime as datetime
 
 conn=sqlite3.connect('sensordata')
 c = conn.cursor()
@@ -9,8 +9,7 @@ table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             temperature NUMERIC,
                             humidity NUMERIC,
                             pressure NUMERIC,
-                            date TEXT,
-                            time TEXT 
+                            datetime timestamp 
                         );"""
     
 #tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(1,1,1)"""
@@ -35,15 +34,13 @@ def create_connection():
     return conn 
 
 def insert_dbvalues(connection,temperature,humidity,pressure):
-    datetimevariable=datetime.now()
+    datetimevariable=datetime.datetime.now()
     date = datetimevariable.strftime("%d-%m-%Y")
     time = datetimevariable.strftime("%H:%M:%S")
-
-  
-
     print( date )
     print( time )
-    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, date, time)VALUES({},{},{},{},{})""".format(temperature,humidity,pressure,date,time)
+
+    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{})""".format(temperature,humidity,pressure,datetime.datetime.now())
     c = connection.cursor()
     try:
         c.execute(tables_insert_string)
