@@ -1,38 +1,33 @@
 import sqlite3
 from datetime import datetime
 
-# sqlite_file = '/home/pi/Desktop/program/sensordata'
 
-# conn = create_connection()
-# c = conn.cursor()
+ conn = create_connection()
+ c = conn.cursor()
 
-# table_name = "sensorreadings"
-# temperature_column = "temperature"
-# humidity_column = "humidity"
-# pressure_column = "pressure"
 
 table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             id integer PRIMARY KEY,
                             temperature NUMERIC,
                             humidity NUMERIC,
                             pressure NUMERIC,
-                            date text,
-                            time text 
+                            date TEXT,
+                            time TEXT 
                         );"""
     
 #tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(1,1,1)"""
 
-# try:
-#     c.execute(table_create_string)
-# except sqlite3.Error as e:
-#         print(e)
+try:
+    c.execute(table_create_string)
+except sqlite3.Error as e:
+        print(e)
 
 # try:
 #     c.execute(tables_insert_string)
 # except sqlite3.IntegrityError as e:
 #         print(e)
 
-# conn.commit()
+ conn.commit()
 
 def create_connection():
     try:
@@ -68,4 +63,4 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
 #     print('ERROR: integerityError')
 
 
-# conn.close()
+ conn.close()
