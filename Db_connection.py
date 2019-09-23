@@ -1,10 +1,8 @@
 import sqlite3
 from datetime import datetime
 
-
 conn = create_connection()
 c = conn.cursor()
-
 
 table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             id integer PRIMARY KEY,
@@ -26,8 +24,7 @@ except sqlite3.Error as e:
 #     c.execute(tables_insert_string)
 # except sqlite3.IntegrityError as e:
 #         print(e)
-
- conn.commit()
+# conn.commit()
 
 def create_connection():
     try:
@@ -63,4 +60,4 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
 #     print('ERROR: integerityError')
 
 
- conn.close()
+conn.close()
