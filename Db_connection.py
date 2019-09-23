@@ -28,10 +28,10 @@ except sqlite3.Error as e:
 
 try:
     c.execute(tables_insert_string)
-except sqlite3.Error as e:
+except sqlite3.IntegrityError as e:
         print(e)
 
-
+conn.commit()
 
 
 # try:
