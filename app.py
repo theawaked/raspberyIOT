@@ -17,6 +17,7 @@ import re
 from telemetry import Telemetry
 
 import sqlite3
+import datetime
 import Db_connection as database
 databaseconnection = database.create_connection()
 

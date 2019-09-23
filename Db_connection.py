@@ -34,13 +34,13 @@ def create_connection():
     return conn 
 
 def insert_dbvalues(connection,temperature,humidity,pressure):
-    datetimevariable=datetime.datetime.now()
+    datetimevariable=datetime.now()
     date = datetimevariable.strftime("%d-%m-%Y")
     time = datetimevariable.strftime("%H:%M:%S")
     print( date )
     print( time )
 
-    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{})""".format(temperature,humidity,pressure,datetime.datetime.now())
+    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{})""".format(temperature,humidity,pressure,datetime.now())
     c = connection.cursor()
     try:
         c.execute(tables_insert_string)
