@@ -19,17 +19,26 @@ table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             time text 
                         );"""
     
+tables_insert_string = """INSERT INTO sensorreadings(termperature, humidity, pressure)VALUES(1,1,1)"""
+
 try:
     c.execute(table_create_string)
 except sqlite3.Error as e:
         print(e)
 
-
 try:
-    c.execute("INSERT INTO {tn} ({cn1}, {cn2}, {cn3}) VALUES (123456, 123456, 123456)".\
-        format(tn=table_name, cn1=temperature_column, cn2=humidity_column, cn3=pressure_column))
-except sqlite3.IntegrityError:
-    print('ERROR: integerityError')
+    c.execute(tables_insert_string)
+except sqlite3.Error as e:
+        print(e)
+
+
+
+
+# try:
+#     c.execute("INSERT INTO {tn} ({cn1}, {cn2}, {cn3}) VALUES (123456, 123456, 123456)".\
+#         format(tn=table_name, cn1=temperature_column, cn2=humidity_column, cn3=pressure_column))
+# except sqlite3.IntegrityError:
+#     print('ERROR: integerityError')
 
 
 conn.close()
