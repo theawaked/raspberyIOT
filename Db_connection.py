@@ -1,6 +1,6 @@
 import sqlite3
 
-sqlite_file = '/home/Desktop/program/sensordata.'
+sqlite_file = '/home/pi/Desktop/program/sensordata.'
 
 conn = sqlite3.connect(sqlite_file)
 c = conn.cursor()
