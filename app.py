@@ -17,7 +17,7 @@ import re
 from telemetry import Telemetry
 
 import sqlite3
-from datetime import *
+from datetime import datetime 
 import Db_connection as database
 databaseconnection = database.create_connection()
 
@@ -212,7 +212,7 @@ def iothub_client_sample_run():
                 temperature = sensor.read_temperature()
                 humidity = sensor.read_humidity()
                 pressure = sensor.read_pressure()
-                dateTimeObj = datetime.datetime.now()-datetime.timedelta(0,7200)
+                dateTimeObj = datetime.now()
                 timestampStr = dateTimeObj.strftime('%Y-%m-%d %H:%M:%S')
                 print(temperature, humidity, pressure, timestampStr)
                 msg_txt_formatted = MSG_TXT % (
