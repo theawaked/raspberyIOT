@@ -212,11 +212,12 @@ def iothub_client_sample_run():
                 temperature = sensor.read_temperature()
                 humidity = sensor.read_humidity()
                 pressure = sensor.read_pressure()
-                timestamp = datetime.now()
+                dateTimeObj = datetime.now()
+                timestampStr = dateTimeObj.strftime("%d-%m-%Y (%H:%M:%S.%f)")
                 print(temperature, humidity, pressure)
                 msg_txt_formatted = MSG_TXT % (
                     temperature,
-                    humidity, pressure, timestamp)
+                    humidity, pressure, timestampStr)
                 print (msg_txt_formatted)
                 message = IoTHubMessage(msg_txt_formatted)
                 # optional: assign ids
