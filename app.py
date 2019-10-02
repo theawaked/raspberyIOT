@@ -214,7 +214,7 @@ def iothub_client_sample_run():
                 pressure = sensor.read_pressure()
                 dateTimeObj = datetime.now()
                 timestampStr = dateTimeObj.strftime("%Y-%m-%d %H:%M:%S")
-                timestampStr = ''+timestampStr
+                timestampStr = " ' " + timestampStr = " ' "
                 print(temperature, humidity, pressure, timestampStr)
                 msg_txt_formatted = MSG_TXT % (
                     temperature,
@@ -235,6 +235,8 @@ def iothub_client_sample_run():
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
 
+
+                ######################## nog zorgen dat dit alleen ofline gebeurt
                 database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
