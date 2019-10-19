@@ -238,9 +238,10 @@ def iothub_client_sample_run():
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
 
-
+            while False:
+                print("conneciton failed uploading to local datbase")
                 ######################## nog zorgen dat dit alleen ofline gebeurt
-                database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
+                #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
 
