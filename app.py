@@ -34,7 +34,7 @@ MINIMUM_POLLING_TIME = 9
 # The timeout period starts at IoTHubClient.send_event_async.
 # By default, messages do not expire.
 MESSAGE_TIMEOUT = 10000
-
+1
 RECEIVE_CONTEXT = 0
 MESSAGE_COUNT = 0
 MESSAGE_SWITCH = True
@@ -164,6 +164,8 @@ def iothub_client_init():
     # set the time until a message times out
     client.set_option("messageTimeout", MESSAGE_TIMEOUT)
     # to enable MQTT logging set to 1
+    
+    #Deze wordt gebruikt
     if client.protocol == IoTHubTransportProvider.MQTT:
         client.set_option("logtrace", 0)
     client.set_message_callback(
@@ -204,6 +206,8 @@ def iothub_client_sample_run():
             print("no sensor, using simulator")
 
         telemetry.send_telemetry_data(parse_iot_hub_name(), EVENT_SUCCESS, "IoT hub connection is established")
+        if False:
+            print(geen connection ~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
         while True:
             global MESSAGE_COUNT,MESSAGE_SWITCH
             if MESSAGE_SWITCH:
@@ -218,7 +222,7 @@ def iothub_client_sample_run():
                 timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
                 timestampStr = "'" + timestampStr + "'"
 
-                print(temperature, humidity, pressure, timestampStr)
+                #print(temperature, humidity, pressure, timestampStr)
                 msg_txt_formatted = MSG_TXT % (
                     temperature,
                     humidity, pressure, timestampStr)
@@ -238,8 +242,8 @@ def iothub_client_sample_run():
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
 
-            while False:
-                print("conneciton failed uploading to local datbase")
+           
+                #print("conneciton failed uploading to local datbase")
                 ######################## nog zorgen dat dit alleen ofline gebeurt
                 #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
