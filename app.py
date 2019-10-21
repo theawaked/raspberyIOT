@@ -194,6 +194,7 @@ def print_last_message_time(client):
 def iothub_client_sample_run():
     try:
         client = iothub_client_init()
+        print(client)
 
         if client.protocol == IoTHubTransportProvider.MQTT:
             print ( "IoTHubClient is reporting state" )
