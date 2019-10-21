@@ -218,7 +218,6 @@ def iothub_client_sample_run():
         telemetry.send_telemetry_data(parse_iot_hub_name(), EVENT_SUCCESS, "IoT hub connection is established")
         
         while True:
-            try:
                 global MESSAGE_COUNT,MESSAGE_SWITCH
                 if MESSAGE_SWITCH:
                     # send a few messages every minute
@@ -253,14 +252,15 @@ def iothub_client_sample_run():
                     print ( "Send status: %s" % status )
                     MESSAGE_COUNT += 1
 
+                    print_last_message_time(client)
+
             
                     #print("conneciton failed uploading to local datbase")
                     ######################## nog zorgen dat dit alleen ofline gebeurt
                     #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
                 time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
-            except Exception as ex:
-                print("error occured conection niet goed?:", ex)
+
     except IoTHubError as iothub_error:
         print("error 253")
         print ( "Unexpected error %s from IoTHub" % iothub_error )
