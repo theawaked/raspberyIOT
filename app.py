@@ -231,7 +231,7 @@ def iothub_client_sample_run():
                     timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
                     timestampStr = "'" + timestampStr + "'"
          
-                    print("error 224")
+                    
                     #print(temperature, humidity, pressure, timestampStr)
                     msg_txt_formatted = MSG_TXT % (
                         temperature,
@@ -244,10 +244,10 @@ def iothub_client_sample_run():
                     # optional: assign properties
                     prop_map = message.properties()
                     prop_map.add("temperatureAlert", "true" if temperature > TEMPERATURE_ALERT else "false")
-                    print("error 237")
+                    
                     client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                     print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
-                    print("error 240")
+                   
                     status = client.get_send_status()
                     print ( "Send status: %s" % status )
                     MESSAGE_COUNT += 1
