@@ -156,7 +156,10 @@ def blob_upload_conf_callback(result, user_context):
 
 def iothub_client_init():
     # prepare iothub client
+    print("client init")
+    
     client = IoTHubClient(CONNECTION_STRING, PROTOCOL)
+    print(client)
     client.set_option("product_info", "HappyPath_RaspberryPi-Python")
     if client.protocol == IoTHubTransportProvider.HTTP:
         client.set_option("timeout", TIMEOUT)
