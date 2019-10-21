@@ -33,7 +33,7 @@ MINIMUM_POLLING_TIME = 9
 # messageTimeout - the maximum time in milliseconds until a message times out.
 # The timeout period starts at IoTHubClient.send_event_async.
 # By default, messages do not expire.
-MESSAGE_TIMEOUT = 10000
+MESSAGE_TIMEOUT = 3600
 1
 RECEIVE_CONTEXT = 0
 MESSAGE_COUNT = 0
@@ -113,6 +113,7 @@ def send_confirmation_callback(message, result, user_context):
 
 
 def device_twin_callback(update_state, payload, user_context):
+
     global TWIN_CALLBACKS
     print ( "\nTwin callback called with:\nupdateStatus = %s\npayload = %s\ncontext = %s" % (update_state, payload, user_context) )
     TWIN_CALLBACKS += 1
