@@ -215,45 +215,45 @@ def iothub_client_sample_run():
         print("geen connection ~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         while True:
             try:
-            global MESSAGE_COUNT,MESSAGE_SWITCH
-            if MESSAGE_SWITCH:
-                # send a few messages every minute
-                print ( "IoTHubClient sending %d messages" % MESSAGE_COUNT )
-                temperature = sensor.read_temperature()
-                humidity = sensor.read_humidity()
-                pressure = sensor.read_pressure()
+                global MESSAGE_COUNT,MESSAGE_SWITCH
+                if MESSAGE_SWITCH:
+                    # send a few messages every minute
+                    print ( "IoTHubClient sending %d messages" % MESSAGE_COUNT )
+                    temperature = sensor.read_temperature()
+                    humidity = sensor.read_humidity()
+                    pressure = sensor.read_pressure()
 
-                dateTimeObj = datetime.now()
-                #timestampStr = dateTimeObj.strftime("%Y-%m-%d %H:%M:%S")
-                timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
-                timestampStr = "'" + timestampStr + "'"
-                print("error 224")
-                #print(temperature, humidity, pressure, timestampStr)
-                msg_txt_formatted = MSG_TXT % (
-                    temperature,
-                    humidity, pressure, timestampStr)
-                print (msg_txt_formatted)
-                message = IoTHubMessage(msg_txt_formatted)
-                # optional: assign ids
-                message.message_id = "message_%d" % MESSAGE_COUNT
-                message.correlation_id = "correlation_%d" % MESSAGE_COUNT
-                # optional: assign properties
-                prop_map = message.properties()
-                prop_map.add("temperatureAlert", "true" if temperature > TEMPERATURE_ALERT else "false")
-                print("error 237")
-                client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
-                print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
-                print("error 240")
-                status = client.get_send_status()
-                print ( "Send status: %s" % status )
-                MESSAGE_COUNT += 1
+                    dateTimeObj = datetime.now()
+                    #timestampStr = dateTimeObj.strftime("%Y-%m-%d %H:%M:%S")
+                    timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
+                    timestampStr = "'" + timestampStr + "'"
+                    print("error 224")
+                    #print(temperature, humidity, pressure, timestampStr)
+                    msg_txt_formatted = MSG_TXT % (
+                        temperature,
+                        humidity, pressure, timestampStr)
+                    print (msg_txt_formatted)
+                    message = IoTHubMessage(msg_txt_formatted)
+                    # optional: assign ids
+                    message.message_id = "message_%d" % MESSAGE_COUNT
+                    message.correlation_id = "correlation_%d" % MESSAGE_COUNT
+                    # optional: assign properties
+                    prop_map = message.properties()
+                    prop_map.add("temperatureAlert", "true" if temperature > TEMPERATURE_ALERT else "false")
+                    print("error 237")
+                    client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
+                    print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
+                    print("error 240")
+                    status = client.get_send_status()
+                    print ( "Send status: %s" % status )
+                    MESSAGE_COUNT += 1
 
-           
-                #print("conneciton failed uploading to local datbase")
-                ######################## nog zorgen dat dit alleen ofline gebeurt
-                #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
+            
+                    #print("conneciton failed uploading to local datbase")
+                    ######################## nog zorgen dat dit alleen ofline gebeurt
+                    #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
-            time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
+                time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
             except:
                 print("error occured conection niet goed?")
 
