@@ -214,6 +214,7 @@ def iothub_client_sample_run():
         
         print("geen connection ~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         while True:
+            try:
             global MESSAGE_COUNT,MESSAGE_SWITCH
             if MESSAGE_SWITCH:
                 # send a few messages every minute
@@ -253,6 +254,8 @@ def iothub_client_sample_run():
                 #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
+            except:
+                print("error occured conection niet goed?")
 
     except IoTHubError as iothub_error:
         print("error 253")
