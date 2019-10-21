@@ -14,7 +14,7 @@ from BME280SensorSimulator import BME280SensorSimulator
 import RPi.GPIO as GPIO
 from Adafruit_BME280 import *
 import re
-from telemetry import Telemetry1
+from telemetry import Telemetry
 
 import sqlite3
 from datetime import datetime 
