@@ -100,9 +100,11 @@ def receive_message_callback(message, counter):
 
 
 def send_confirmation_callback(message, result, user_context):
+
+    global SEND_CALLBACKS
     if str(result) == 'MESSAGE_TIMEOUT':
         print("send_confirmation_callback:", result)
-    global SEND_CALLBACKS
+
     print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
     print ( "    message_id: %s" % message.message_id )
