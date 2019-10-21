@@ -227,7 +227,7 @@ def iothub_client_sample_run():
                     timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
                     timestampStr = "'" + timestampStr + "'"
          
-                   print("error 224")
+                    print("error 224")
                     #print(temperature, humidity, pressure, timestampStr)
                     msg_txt_formatted = MSG_TXT % (
                         temperature,
