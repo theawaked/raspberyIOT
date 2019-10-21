@@ -197,7 +197,7 @@ def print_last_message_time(client):
 def iothub_client_sample_run():
     try:
         client = iothub_client_init()
-        print(client)
+        print("client object" , client)
 
         if client.protocol == IoTHubTransportProvider.MQTT:
             print ( "IoTHubClient is reporting state" )
@@ -212,7 +212,6 @@ def iothub_client_sample_run():
 
         telemetry.send_telemetry_data(parse_iot_hub_name(), EVENT_SUCCESS, "IoT hub connection is established")
         
-        print("geen connection ~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         while True:
             try:
                 global MESSAGE_COUNT,MESSAGE_SWITCH
@@ -227,7 +226,8 @@ def iothub_client_sample_run():
                     #timestampStr = dateTimeObj.strftime("%Y-%m-%d %H:%M:%S")
                     timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
                     timestampStr = "'" + timestampStr + "'"
-                    print("error 224")
+         
+                   print("error 224")
                     #print(temperature, humidity, pressure, timestampStr)
                     msg_txt_formatted = MSG_TXT % (
                         temperature,
