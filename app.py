@@ -200,7 +200,7 @@ def iothub_client_sample_run():
         print("client object" , client)
 
         if client.protocol == IoTHubTransportProvider.MQTT:
-            print ( "IoTHubClient is reporting state" )
+            #print ( "IoTHubClient is reporting state" )
             reported_state = "{\"newState\":\"standBy\"}"
             client.send_reported_state(reported_state, len(reported_state), send_reported_state_callback, SEND_REPORTED_STATE_CONTEXT)
 
@@ -254,9 +254,8 @@ def iothub_client_sample_run():
                     #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
 
                 time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
-            except:
-                print("error occured conection niet goed?")
-
+            except Exception as ex:
+                print("error occured conection niet goed?:", ex)
     except IoTHubError as iothub_error:
         print("error 253")
         print ( "Unexpected error %s from IoTHub" % iothub_error )
