@@ -252,7 +252,7 @@ def iothub_client_sample_run():
                     print ( "Send status: %s" % status )
                     MESSAGE_COUNT += 1
 
-                    print_last_message_time(client)
+                    
 
             
                     #print("conneciton failed uploading to local datbase")
