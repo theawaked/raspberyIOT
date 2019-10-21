@@ -14,7 +14,7 @@ from BME280SensorSimulator import BME280SensorSimulator
 import RPi.GPIO as GPIO
 from Adafruit_BME280 import *
 import re
-from telemetry import Telemetry
+from telemetry import Telemetry1
 
 import sqlite3
 from datetime import datetime 
@@ -187,6 +187,7 @@ def print_last_message_time(client):
         if iothub_client_error.args[0].result == IoTHubClientResult.INDEFINITE_TIME:
             print ( "No message received" )
         else:
+            print("error 190")
             print ( iothub_client_error )
 
 
@@ -206,8 +207,8 @@ def iothub_client_sample_run():
             print("no sensor, using simulator")
 
         telemetry.send_telemetry_data(parse_iot_hub_name(), EVENT_SUCCESS, "IoT hub connection is established")
-        if False:
-            print("geen connection ~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        
+        print("geen connection ~!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         while True:
             global MESSAGE_COUNT,MESSAGE_SWITCH
             if MESSAGE_SWITCH:
@@ -221,7 +222,7 @@ def iothub_client_sample_run():
                 #timestampStr = dateTimeObj.strftime("%Y-%m-%d %H:%M:%S")
                 timestampStr = dateTimeObj.strftime("%A %B %-d,%Y")
                 timestampStr = "'" + timestampStr + "'"
-
+                print("error 224")
                 #print(temperature, humidity, pressure, timestampStr)
                 msg_txt_formatted = MSG_TXT % (
                     temperature,
@@ -234,10 +235,10 @@ def iothub_client_sample_run():
                 # optional: assign properties
                 prop_map = message.properties()
                 prop_map.add("temperatureAlert", "true" if temperature > TEMPERATURE_ALERT else "false")
-
+                print("error 237")
                 client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                 print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
-
+                print("error 240")
                 status = client.get_send_status()
                 print ( "Send status: %s" % status )
                 MESSAGE_COUNT += 1
@@ -250,12 +251,13 @@ def iothub_client_sample_run():
             time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
 
     except IoTHubError as iothub_error:
+        print("error 253")
         print ( "Unexpected error %s from IoTHub" % iothub_error )
         telemetry.send_telemetry_data(parse_iot_hub_name(), EVENT_FAILED, "Unexpected error %s from IoTHub" % iothub_error)
         return
     except KeyboardInterrupt:
         print ( "IoTHubClient sample stopped" )
-
+    
     print_last_message_time(client)
 
 def led_blink():
