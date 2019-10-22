@@ -103,9 +103,10 @@ def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
     if str(result) == 'MESSAGE_TIMEOUT':
         print("message timed_out, saving variables to local database:", result)
-        print(dir(message))
-        print(message.properties('temperature'))
-        print(message.get_string())
+        message_buffer = message.get_bytearray()
+        size = len(message_buffer)
+        message_text = message_buffer[:size].decode('utf-8')
+        print ( "    Data: <<<%s>>> & Size=%d" % (message_text, size) )
 
     print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
