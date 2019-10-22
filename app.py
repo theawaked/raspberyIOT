@@ -268,6 +268,8 @@ def iothub_client_sample_run():
         return
     except KeyboardInterrupt:
         print ( "IoTHubClient sample stopped" )
+    except: 
+        print("error geen connection met iothub?")
     
     print_last_message_time(client)
 
