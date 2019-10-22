@@ -36,7 +36,7 @@ def create_connection():
 
     return conn 
 
-def insert_dbvalues(connection,temperature,humidity,pressure,datetime):
+def insert_dbvalues(connection,temperature,humidity,pressure):
        # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
        data_tuple = (temperature, humidity, pressure, datetime)
        tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES(?,?,?,?)"""
