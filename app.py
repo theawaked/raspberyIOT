@@ -33,7 +33,7 @@ MINIMUM_POLLING_TIME = 9
 # messageTimeout - the maximum time in milliseconds until a message times out.
 # The timeout period starts at IoTHubClient.send_event_async.
 # By default, messages do not expire.
-MESSAGE_TIMEOUT = 30
+MESSAGE_TIMEOUT = 1000
 
 RECEIVE_CONTEXT = 0
 MESSAGE_COUNT = 0
@@ -104,7 +104,7 @@ def send_confirmation_callback(message, result, user_context):
     if str(result) == 'MESSAGE_TIMEOUT':
         print("message timed_out, saving variables to local database:", result)
         print(dir(message))
-        print(message.properties)
+        print(message.properties())
 
     print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
