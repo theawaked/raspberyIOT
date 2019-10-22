@@ -250,9 +250,9 @@ def iothub_client_sample_run():
                     # optional: assign properties
                     prop_map = message.properties()
                     prop_map.add("temperatureAlert", "true" if temperature > TEMPERATURE_ALERT else "false")
-                    prop_map.add("temp", temperature)
-                    prop_map.add("hum", humidity)
-                    prop_map.add("pres", pressure)
+                    prop_map.add("temp", str(temperature))
+                    prop_map.add("hum", str(humidity))
+                    prop_map.add("pres", str(pressure))
                     
                     client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                     print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
