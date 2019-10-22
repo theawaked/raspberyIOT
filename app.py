@@ -115,6 +115,8 @@ def send_confirmation_callback(message, result, user_context):
     print ( "    message_id: %s" % message.message_id )
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
+    for i in key_value_pair:
+        print key_value_pair[i]
     print ( "    Properties: %s" % key_value_pair )
     SEND_CALLBACKS += 1
     print ( "    Total calls confirmed: %d" % SEND_CALLBACKS )
