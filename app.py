@@ -33,7 +33,7 @@ MINIMUM_POLLING_TIME = 9
 # messageTimeout - the maximum time in milliseconds until a message times out.
 # The timeout period starts at IoTHubClient.send_event_async.
 # By default, messages do not expire.
-MESSAGE_TIMEOUT = 1000
+MESSAGE_TIMEOUT = 500
 
 RECEIVE_CONTEXT = 0
 MESSAGE_COUNT = 0
@@ -101,22 +101,16 @@ def receive_message_callback(message, counter):
 
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
-    #if str(result) == 'MESSAGE_TIMEOUT':
-    # print("message timed_out, saving variables to local database:", result)
-    # message_buffer = message.get_bytearray()
-    # print(message_buffer)
-    # size = len(message_buffer)
-    # print(size)
-    #message_text = message_buffer[:size].decode('utf-8')
-    #print ( "    Data: <<<%s>>> & Size=%d" % (message_text, size) )
 
     print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
     print ( "    message_id: %s" % message.message_id )
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
-    for i in key_value_pair:
-        print (key_value_pair[i])
+    if str(result) == 'MESSAGE_TIMEOUT':
+        print("message timedout saving variables locally")
+        database.insert_dbvalues(databaseconnection,key_value_pair[2],key_value_pair[3],key_value_pair[4])
+
     print ( "    Properties: %s" % key_value_pair )
     SEND_CALLBACKS += 1
     print ( "    Total calls confirmed: %d" % SEND_CALLBACKS )
@@ -168,7 +162,7 @@ def blob_upload_conf_callback(result, user_context):
 
 def iothub_client_init():
     # prepare iothub client
-    print("client init")
+    print("client initializing")
     
     client = IoTHubClient(CONNECTION_STRING, PROTOCOL)
     print(client)
@@ -209,10 +203,8 @@ def print_last_message_time(client):
 def iothub_client_sample_run():
     try:
         client = iothub_client_init()
-        print("client object" , client)
 
         if client.protocol == IoTHubTransportProvider.MQTT:
-            #print ( "IoTHubClient is reporting state" )
             reported_state = "{\"newState\":\"standBy\"}"
             client.send_reported_state(reported_state, len(reported_state), send_reported_state_callback, SEND_REPORTED_STATE_CONTEXT)
 
@@ -255,6 +247,7 @@ def iothub_client_sample_run():
                     prop_map.add("temp", str(temperature))
                     prop_map.add("hum", str(humidity))
                     prop_map.add("pres", str(pressure))
+                    prop_map.add("pres", str(timestampStr))
                     
                     client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                     print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )

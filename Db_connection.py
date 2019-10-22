@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime as datetime
 
-#this file contains methods for inserting sensor data into an sqlite database, import this to another file to use
+#this file contains methods for inserting sensor data into an sqlite database, import this to another file to use the functions.
 #running this file wil create the database and table for storing the sensordata
 
 conn=sqlite3.connect('sensordata')
@@ -36,14 +36,9 @@ def create_connection():
 
     return conn 
 
-def insert_dbvalues(connection,temperature,humidity,pressure):
-       datetimevariable=datetime.now()
-       date = datetimevariable.strftime("%d-%m-%Y")
-       time = datetimevariable.strftime("%H:%M:%S")
-       print( date )
-       print( time )
+def insert_dbvalues(connection,temperature,humidity,pressure,datetime):
        # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
-       data_tuple = (temperature, humidity, pressure, datetime.now())
+       data_tuple = (temperature, humidity, pressure, datetime)
        tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES(?,?,?,?)"""
 
    
