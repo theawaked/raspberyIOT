@@ -100,7 +100,7 @@ def receive_message_callback(message, counter):
 
 
 def send_confirmation_callback(message, result, user_context):
-
+    print("result:", result)
     global SEND_CALLBACKS
     if str(result) == 'MESSAGE_TIMEOUT':
         print("send_confirmation_callback:", result)
