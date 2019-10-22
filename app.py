@@ -102,11 +102,11 @@ def receive_message_callback(message, counter):
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
     #if str(result) == 'MESSAGE_TIMEOUT':
-    print("message timed_out, saving variables to local database:", result)
-    message_buffer = message.get_bytearray()
-    print(message_buffer)
-    size = len(message_buffer)
-    print(size)
+    # print("message timed_out, saving variables to local database:", result)
+    # message_buffer = message.get_bytearray()
+    # print(message_buffer)
+    # size = len(message_buffer)
+    # print(size)
     #message_text = message_buffer[:size].decode('utf-8')
     #print ( "    Data: <<<%s>>> & Size=%d" % (message_text, size) )
 
@@ -250,6 +250,9 @@ def iothub_client_sample_run():
                     # optional: assign properties
                     prop_map = message.properties()
                     prop_map.add("temperatureAlert", "true" if temperature > TEMPERATURE_ALERT else "false")
+                    prop_map.add("temp", temperature)
+                    prop_map.add("hum", humidity)
+                    prop_map.add("pres", pressure)
                     
                     client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                     print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
