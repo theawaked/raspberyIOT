@@ -53,7 +53,7 @@ METHOD_CALLBACKS = 0
 EVENT_SUCCESS = "success"
 EVENT_FAILED = "failed"
 
-databaseconnection = create_connection()
+databaseconnection = createconnection()
 
 # chose HTTP, AMQP or MQTT as transport protocol
 PROTOCOL = IoTHubTransportProvider.MQTT
@@ -303,14 +303,15 @@ if __name__ == "__main__":
 
     iothub_client_sample_run()
 
-def create_connection():
+def createconnection():
     try:
-        conn=sqlite3.connect('sensordata')
+        conn = sqlite3.connect('sensordata')
     except sqlite3.Error as e:
      print(e)
 
-    #c = conn.cursor()
-    return conn
+     #c = conn.cursor()
+    
+    return conn 
 
 def insert_dbvalues(connection,temperature,humidity,pressure):
        # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
