@@ -33,7 +33,7 @@ MINIMUM_POLLING_TIME = 9
 # messageTimeout - the maximum time in milliseconds until a message times out.
 # The timeout period starts at IoTHubClient.send_event_async.
 # By default, messages do not expire.
-MESSAGE_TIMEOUT = 120
+MESSAGE_TIMEOUT = 12
 
 RECEIVE_CONTEXT = 0
 MESSAGE_COUNT = 0
