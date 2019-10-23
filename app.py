@@ -19,7 +19,7 @@ from telemetry import Telemetry
 import sqlite3
 from datetime import datetime 
 import Db_connection as database
-databaseconnection = database.create_connection()
+databaseconnection = create_connection()
 
 # HTTP options
 # Because it can poll "after 9 seconds" polls will happen effectively
@@ -113,7 +113,7 @@ def send_confirmation_callback(message, result, user_context):
         print (key_value_pair[i])
         
     print("message timedout saving variables locally")
-    database.insert_dbvalues(databaseconnection,key_value_pair['temp'],key_value_pair['hum'],key_value_pair['pres'])
+    insert_dbvalues(databaseconnection,key_value_pair['temp'],key_value_pair['hum'],key_value_pair['pres'])
 
     print ( "    Properties: %s" % key_value_pair )
     SEND_CALLBACKS += 1
@@ -300,3 +300,30 @@ if __name__ == "__main__":
     print ( "IoT Hub Client for Python" )
 
     iothub_client_sample_run()
+
+def create_connection():
+    try:
+        conn=sqlite3.connect('sensordata')
+    except sqlite3.Error as e:
+     print(e)
+
+    #c = conn.cursor()
+    return conn
+
+def insert_dbvalues(connection,temperature,humidity,pressure):
+       # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
+       datetime1 = datetime.now()
+       data_tuple = (temperature, humidity, pressure)
+       tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(?,?,?)"""
+
+   
+       #print(tables_insert_string)
+       c = connection.cursor()
+       try:
+           connection.execute(tables_insert_string, data_tuple)
+       except sqlite3.IntegrityError as e:
+           print(e)
+       
+       connection.commit()
+
+       c.close()
