@@ -112,9 +112,8 @@ def send_confirmation_callback(message, result, user_context):
         print(i)   
         print (key_value_pair[i])
         
-    print (key_value_pair[1])   
     print("message timedout saving variables locally")
-    database.insert_dbvalues(databaseconnection,key_value_pair[1],key_value_pair[2],key_value_pair[3])
+    database.insert_dbvalues(databaseconnection,key_value_pair[temp],key_value_pair[hum],key_value_pair[pres])
 
     print ( "    Properties: %s" % key_value_pair )
     SEND_CALLBACKS += 1
