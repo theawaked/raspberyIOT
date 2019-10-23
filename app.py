@@ -57,29 +57,27 @@ def createconnection():
     try:
         conn = sqlite3.connect('sensordata')
     except sqlite3.Error as e:
-     print(e)
-
-     #c = conn.cursor()
-    
+        print(e)
+        #c = conn.cursor()
     return conn 
 
 def insert_dbvalues(connection,temperature,humidity,pressure):
-       # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
-       datetime1 = datetime.now()
-       data_tuple = (temperature, humidity, pressure)
-       tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(?,?,?)"""
+    # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
+    datetime1 = datetime.now()
+    data_tuple = (temperature, humidity, pressure)
+    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(?,?,?)"""
 
    
-       #print(tables_insert_string)
-       c = connection.cursor()
-       try:
-           c.execute(tables_insert_string, data_tuple)
-       except sqlite3.IntegrityError as e:
-           print(e)
+    #print(tables_insert_string)
+    c = connection.cursor()
+    try:
+        c.execute(tables_insert_string, data_tuple)
+    except sqlite3.IntegrityError as e:
+        print(e)
        
-       c.commit()
+    c.commit()
 
-       c.close()
+    c.close()
 
 databaseconnection = createconnection()
 
