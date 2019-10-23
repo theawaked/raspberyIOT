@@ -33,7 +33,7 @@ MINIMUM_POLLING_TIME = 9
 # messageTimeout - the maximum time in milliseconds until a message times out.
 # The timeout period starts at IoTHubClient.send_event_async.
 # By default, messages do not expire.
-MESSAGE_TIMEOUT = 500
+MESSAGE_TIMEOUT = 120
 
 RECEIVE_CONTEXT = 0
 MESSAGE_COUNT = 0
@@ -108,6 +108,7 @@ def send_confirmation_callback(message, result, user_context):
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
     if str(result) == 'MESSAGE_TIMEOUT':
+        print(key_value_pair[2])
         print("message timedout saving variables locally")
         database.insert_dbvalues(databaseconnection,key_value_pair[2],key_value_pair[3],key_value_pair[4])
 
