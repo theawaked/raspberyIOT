@@ -320,10 +320,10 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
        #print(tables_insert_string)
        c = connection.cursor()
        try:
-           connection.execute(tables_insert_string, data_tuple)
+           c.execute(tables_insert_string, data_tuple)
        except sqlite3.IntegrityError as e:
            print(e)
        
-       connection.commit()
+       c.commit()
 
        c.close()
