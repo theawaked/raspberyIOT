@@ -12,7 +12,7 @@ table_create_string = """CREATE TABLE IF NOT EXISTS sensorreadings(
                             temperature NUMERIC,
                             humidity NUMERIC,
                             pressure NUMERIC,
-                            datetime timestamp 
+                            datetime datetime
                         );"""
     
 #tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(1,1,1)"""
@@ -39,8 +39,8 @@ def create_connection():
 def insert_dbvalues(connection,temperature,humidity,pressure):
        # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
        datetime1 = datetime.now()
-       data_tuple = (temperature, humidity, pressure, datetime1)
-       tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES(?,?,?,?)"""
+       data_tuple = (temperature, humidity, pressure)
+       tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(?,?,?)"""
 
    
        #print(tables_insert_string)
