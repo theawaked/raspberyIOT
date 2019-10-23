@@ -18,8 +18,8 @@ from telemetry import Telemetry
 
 import sqlite3
 from datetime import datetime 
-import Db_connection as database
-databaseconnection = create_connection()
+#import Db_connection as database
+
 
 # HTTP options
 # Because it can poll "after 9 seconds" polls will happen effectively
@@ -52,6 +52,8 @@ SEND_REPORTED_STATE_CALLBACKS = 0
 METHOD_CALLBACKS = 0
 EVENT_SUCCESS = "success"
 EVENT_FAILED = "failed"
+
+databaseconnection = create_connection()
 
 # chose HTTP, AMQP or MQTT as transport protocol
 PROTOCOL = IoTHubTransportProvider.MQTT
