@@ -108,7 +108,8 @@ def send_confirmation_callback(message, result, user_context):
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
     #if str(result) == 'MESSAGE_TIMEOUT':
-    for i in key_value_pair:	   
+    for i in key_value_pair:	
+        print(i)   
         print (key_value_pair[i])
         
     print (key_value_pair[1])   
