@@ -51,7 +51,7 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
        except sqlite3.IntegrityError as e:
            print(e)
        
-       c.commit()
+       connection.commit()
 
        c.close()
        
