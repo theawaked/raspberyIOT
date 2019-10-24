@@ -75,12 +75,15 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
     #print(tables_insert_string)
     c = connection.cursor()
     try:
-        #c.execute(tables_insert_string, data_tuple)
-        c.execute('SELECT current_database()')
-        random = c.fetchone()
-        print(random)
-     #except sqlite3.IntegrityError as e:
-     #print(e)
+        c.execute(tables_insert_string, data_tuple)
+        
+        #teststring to see if database connection established.
+        #c.execute('SELECT current_database()')
+        #random = c.fetchone()
+        #print(random)
+        
+        #except sqlite3.IntegrityError as e:
+        #print(e)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
 
