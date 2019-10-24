@@ -18,6 +18,7 @@ from telemetry import Telemetry
 
 import sqlite3
 import psycopg2
+import atexit
 from datetime import datetime 
 #import Db_connection as database
 
@@ -53,6 +54,7 @@ SEND_REPORTED_STATE_CALLBACKS = 0
 METHOD_CALLBACKS = 0
 EVENT_SUCCESS = "success"
 EVENT_FAILED = "failed"
+conn = None
 
 def createconnection():
     try:
@@ -92,7 +94,13 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
 
     c.close()
 
+def remove_connection(connection):
+    connection.close(remove_connection, conn)
+    print("program stopped destroying connection to database")
+
 databaseconnection = createconnection()
+atexit.register(remove_connection,)
+
 
 # chose HTTP, AMQP or MQTT as transport protocol
 PROTOCOL = IoTHubTransportProvider.MQTT
