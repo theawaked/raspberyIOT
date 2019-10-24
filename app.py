@@ -76,7 +76,7 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
     c = connection.cursor()
     try:
         #c.execute(tables_insert_string, data_tuple)
-        c.excecute('SELECT current_database()')
+        c.execute('SELECT current_database()')
         random = c.fetchone()
         print(random)
      #except sqlite3.IntegrityError as e:
