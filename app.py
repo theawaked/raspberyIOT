@@ -55,7 +55,7 @@ EVENT_FAILED = "failed"
 
 def createconnection():
     try:
-        conn = sqlite3.connect('sensordata')
+        conn = sqlite3.connect('sensordata', check_same_thread=False)   
     except sqlite3.Error as e:
         print(e)
         #c = conn.cursor()
