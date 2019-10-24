@@ -69,13 +69,13 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
     # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
     datetime1 = datetime.now()
     data_tuple = (temperature, humidity, pressure)
-    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure)VALUES(%s)"""
+    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure) VALUES({},{},{})""".format(*data_tuple)
 
    
     #print(tables_insert_string)
     c = connection.cursor()
     try:
-        c.execute(tables_insert_string, data_tuple)
+        c.execute(tables_insert_string)
         
         #teststring to see if database connection established.
         #c.execute('SELECT current_database()')
