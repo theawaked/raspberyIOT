@@ -88,7 +88,7 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
         print(error)
 
        
-    #connection.commit()
+    connection.commit()
 
     c.close()
 
