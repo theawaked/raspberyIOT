@@ -17,6 +17,7 @@ import re
 from telemetry import Telemetry
 
 import sqlite3
+import psycopg2
 from datetime import datetime 
 #import Db_connection as database
 
@@ -55,7 +56,10 @@ EVENT_FAILED = "failed"
 
 def createconnection():
     try:
-        conn = sqlite3.connect('sensordata', check_same_thread=False)   
+        conn = psycopg2.connect(user = "pi",
+                                password = "pi1324",
+                                database = "pi")
+        #conn = sqlite3.connect('sensordata', check_same_thread=False)   
     except sqlite3.Error as e:
         print(e)
         #c = conn.cursor()
@@ -71,11 +75,17 @@ def insert_dbvalues(connection,temperature,humidity,pressure):
     #print(tables_insert_string)
     c = connection.cursor()
     try:
-        c.execute(tables_insert_string, data_tuple)
-    except sqlite3.IntegrityError as e:
-        print(e)
+        #c.execute(tables_insert_string, data_tuple)
+        c.excecute('SELECT current_database()')
+        random = c.fetchone()
+        print(random)
+     #except sqlite3.IntegrityError as e:
+     #print(e)
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+
        
-    connection.commit()
+    #connection.commit()
 
     c.close()
 
