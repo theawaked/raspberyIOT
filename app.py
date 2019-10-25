@@ -299,7 +299,7 @@ def iothub_client_sample_run():
                     prop_map.add("temp", str(temperature))
                     prop_map.add("hum", str(humidity))
                     prop_map.add("pres", str(pressure))
-                    prop_map.add("time", str(timestampStr))
+                    prop_map.add("time", timestampStr)
                     
                     client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                     print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
