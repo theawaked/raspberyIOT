@@ -72,6 +72,7 @@ def insert_dbvalues(connection,temperature,humidity,pressure,time):
     # datetime1 = datetime.now()
     data_tuple = (temperature, humidity, pressure, time)
     tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime) VALUES({},{},{},{})""".format(*data_tuple)
+    print(tables_insert_string)
 
    
     #print(tables_insert_string)
