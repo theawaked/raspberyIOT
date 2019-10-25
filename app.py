@@ -67,11 +67,11 @@ def createconnection():
         #c = conn.cursor()
     return conn 
 
-def insert_dbvalues(connection,temperature,humidity,pressure):
+def insert_dbvalues(connection,temperature,humidity,pressure,time):
     # tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime)VALUES({},{},{},{});""".format(temperature,humidity,pressure,datetime.now())
-    datetime1 = datetime.now()
-    data_tuple = (temperature, humidity, pressure)
-    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure) VALUES({},{},{})""".format(*data_tuple)
+    # datetime1 = datetime.now()
+    data_tuple = (temperature, humidity, pressure, time)
+    tables_insert_string = """INSERT INTO sensorreadings(temperature, humidity, pressure, datetime) VALUES({},{},{},{})""".format(*data_tuple)
 
    
     #print(tables_insert_string)
@@ -156,13 +156,13 @@ def send_confirmation_callback(message, result, user_context):
     print ( "    message_id: %s" % message.message_id )
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
-    #if str(result) == 'MESSAGE_TIMEOUT':
-    for i in key_value_pair:	
-        print(i)   
-        print (key_value_pair[i])
+    if str(result) == 'MESSAGE_TIMEOUT':
+    # for i in key_value_pair:	
+    #     print(i)   
+    #     print (key_value_pair[i])
         
-    print("message timedout saving variables locally")
-    insert_dbvalues(databaseconnection,key_value_pair['temp'],key_value_pair['hum'],key_value_pair['pres'])
+        print("message timedout saving variables locally")
+        insert_dbvalues(databaseconnection,key_value_pair['temp'],key_value_pair['hum'],key_value_pair['pres'], key_value_pair['time'])
 
     print ( "    Properties: %s" % key_value_pair )
     SEND_CALLBACKS += 1
@@ -300,7 +300,7 @@ def iothub_client_sample_run():
                     prop_map.add("temp", str(temperature))
                     prop_map.add("hum", str(humidity))
                     prop_map.add("pres", str(pressure))
-                    #prop_map.add("pres", str(timestampStr))
+                    prop_map.add("time", str(timestampStr))
                     
                     client.send_event_async(message, send_confirmation_callback, MESSAGE_COUNT)
                     print ( "IoTHubClient.send_event_async accepted message [%d] for transmission to IoT Hub." % MESSAGE_COUNT )
@@ -308,13 +308,7 @@ def iothub_client_sample_run():
                     status = client.get_send_status()
                     print ( "Send status: %s" % status )
                     MESSAGE_COUNT += 1
-
-                    
-
-            
-                    #print("conneciton failed uploading to local datbase")
-                    ######################## nog zorgen dat dit alleen ofline gebeurt
-                    #database.insert_dbvalues(databaseconnection,temperature,humidity,pressure)    
+  
 
                 time.sleep(config.MESSAGE_TIMESPAN / 1000.0)
 
