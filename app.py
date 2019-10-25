@@ -161,7 +161,7 @@ def send_confirmation_callback(message, result, user_context):
     #     print (key_value_pair[i])
         
         print("message timedout saving variables locally")
-        insert_dbvalues(databaseconnection,key_value_pair['temp'],key_value_pair['hum'],key_value_pair['pres'],key_value_pair['time'])
+        insert_dbvalues(databaseconnection,key_value_pair['temp'],key_value_pair['hum'],key_value_pair['pres'],key_value_pair['time'].replace('"',''))
 
     print ( "    Properties: %s" % key_value_pair )
     SEND_CALLBACKS += 1
