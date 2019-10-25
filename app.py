@@ -150,13 +150,12 @@ def receive_message_callback(message, counter):
 
 def send_confirmation_callback(message, result, user_context):
     global SEND_CALLBACKS
-
     print ( "Confirmation[%d] received for message with result = %s" % (user_context, result) )
     map_properties = message.properties()
     print ( "    message_id: %s" % message.message_id )
     print ( "    correlation_id: %s" % message.correlation_id )
     key_value_pair = map_properties.get_internals()
-    if str(result) == 'MESSAGE_TIMEOUT':
+    if str(result) == 'MESSAGE_TIMEOUT' or 'BECAUSE_DESTROY':
     # for i in key_value_pair:	
     #     print(i)   
     #     print (key_value_pair[i])
@@ -288,7 +287,7 @@ def iothub_client_sample_run():
                     msg_txt_formatted = MSG_TXT % (
                         temperature,
                         humidity, pressure, timestampStr)
-                    print (msg_txt_formatted)
+                
                     message = IoTHubMessage(msg_txt_formatted)
                     print(message)
                     # optional: assign ids
